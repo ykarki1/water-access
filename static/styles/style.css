@@ -4,6 +4,7 @@
 
 .jumbotron {
     background-image: linear-gradient(rgb(42, 23, 110), rgb(38, 128, 180));
+    margin: 0;
   }
 
 .jumbotron iframe {
