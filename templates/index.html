@@ -1,44 +1,43 @@
 {% extends "layout.html" %} {% block firstblock %}
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <iframe
-      data-aos="flip-left"
-      title="vimeo-player"
-      src="https://player.vimeo.com/video/140235935"
-      width="1024"
-      height="720"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
+<section id="main">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <iframe
+        data-aos="flip-left"
+        title="vimeo-player"
+        src="https://player.vimeo.com/video/140235935"
+        width="1024"
+        height="720"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
-</div>
+</section>
+
 <section id="infoSection">
+  <!-- Maybe add a tweet about water from WHO or another organization in this section using webscraping  -->
   <div class="container">
-    <h1 data-aos="fade-right">In some places, it's normal to walk 4 hours a day to get water.</h1>
+    <h1 data-aos="fade-right">
+      In some places, it's normal to walk 4 hours a day to get water.
+    </h1>
     <h1 data-aos="fade-left">
       Many in remote areas have to rely on small brooks running from the
       mountains and spend hours traveling to get water.
     </h1>
   </div>
 </section>
+
 <br />
+
 <section id="chartSection">
   <div data-aos="zoom-in" id="myDiv"></div>
-  <label for="country">Select a country</label>
-  <select id="selCountry">
+  <div id="countrySelector" class="container">
+    <label for="country">Select a country</label>
+    <select id="selCountry" onchange="filterPlot()">
       <option value="World" selected disabled hidden>World</option>
-  </select>  
-  <button id="filter-btn" type="submit" class="btn btn-default center-block">
-    Filter
-  </button>
-  <button id="clear-btn" type="submit" class="btn btn-default center-block">
-    Clear Filters
-  </button>
+    </select>
+  </div>
 </section>
-<div>
-  <iframe
-    src="https://ourworldindata.org/grapher/drinking-water-service-coverage"
-    style="width: 100%; height: 600px; border: 0px none;"
-  ></iframe>
-</div>
+
 {% endblock %}
