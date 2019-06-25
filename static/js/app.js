@@ -2,6 +2,7 @@ AOS.init();
 
 // Create the country dropdown menu
 var countrySelector = d3.select("#selCountry");
+var yearSelector = d3.select("#yearSelector");
 
 function countries() {
   var countries = data.map(data => data.entity).sort();
@@ -11,6 +12,15 @@ function countries() {
     row.text(element);
   });
 };
+
+function createYears() {
+  var year = data.map(data => data.year).sort();
+  var uniqueYear = [...new Set(year)];
+  uniqueYear.forEach(element => {
+    var row = yearSelector.append("option");
+    row.text(element);
+  });
+}
 
 function filterPlot() {
   var selectedCountry = countrySelector.property("value");
@@ -92,11 +102,45 @@ function filterPlot() {
     barmode: "stack"
   };
 
-  Plotly.newPlot("myDiv", data, layout);
+  Plotly.newPlot("myDiv", data, layout, { responsive: true });
+}
+
+function year(year) {
+Plotly.d3.csv(
+  "https://gist.githubusercontent.com/galadREAL/5f3fe2d809e04cb413dd73dad7362c4b/raw/c9084c44059d4599d66186675ddcab599e0f0012/water_data.csv",
+  function(err, rows) {
+    function unpack(rows, key) {
+      return rows.map(function(row) {
+        return row[key];
+      });
+    }
+    var data = [
+      {
+        type: "choropleth",
+        locationmode: "Country Name",
+        locations: unpack(rows, "Country Code"),
+        z: unpack(rows, year),
+        text: unpack(rows, "Country Code"),
+        autocolorscale: true
+      }
+    ];
+    console.log(data);
+
+    var layout = {
+      title: "Access to Clean Water by Country",
+      geo: {
+        projection: {
+          type: "Hammer"
+        }
+      }
+    };
+    Plotly.newPlot("choropleth", data, layout, { showLink: false });
+  }
+);
 };
+
 // run filterPlot with 'world' as the selectedCountry to produce the initial bar chart
 countries();
 filterPlot();
-
-var filterbtn = d3.select("#filter-btn");
-filterbtn.on("click", filterPlot);
+createYears();
+year(2015)
