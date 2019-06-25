@@ -21,11 +21,11 @@ import time
 import os
 import subprocess
 #ansi colors package
-import colors
+#import colors
 import time
 import datetime
 #used with debugging
-from rfc3339 import rfc3339
+#from rfc3339 import rfc3339
 from sqlalchemy import create_engine
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -43,6 +43,7 @@ from flask import Flask, redirect, url_for, render_template, g, request, jsonify
 # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 #!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8
+
 
 def init_splinter():
     '''
@@ -172,6 +173,11 @@ def do_all_the_things():
     test = create_db(DF)
     return test
 
+
+@app.route('/')
+def index():
+    return render_template("index.html")
+
 @app.route('/data')
 def return_data():
     all_data = do_all_the_things()
@@ -185,7 +191,7 @@ def return_data():
 #?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
 #? * * * * * * * * * * * * * * * * * * * / Debugging Stuffs / * * * * * * * * * * * * * * * * * * * *@
 #? - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - @
-
+'''
 @app.before_request
 def start_timer():
     g.start = time.time()
@@ -226,6 +232,7 @@ def log_request(response):
     app.logger.info(line)
     ############################################
     return response
+    '''
 
 if __name__ == "__main__":
     app.run(debug=True)
