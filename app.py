@@ -77,6 +77,14 @@ def scrape_worldbank():
     url = "http://api.worldbank.org/v2/en/indicator/SH.H2O.SMDW.ZS?downloadformat=csv"
     browser.visit(url)
 
+##????
+#def scrape_deaths():
+#    browser = init_splinter()
+#    #browser.driver.minimize_window()
+#    browser.visit("https://ourworldindata.org/grapher/death-rate-unsafe-water-source?country=CAF")
+#    browser.find_by_xpath("/html/body/main/figure/div/div[4]/div/a")
+##????
+
 #todo make this os.filepath.join instead
 def get_slash():
     '''
@@ -124,7 +132,7 @@ def clean_data(csv1, csv2):
     '''
     csv1_DF = pd.read_csv(csv1, header=2)
     csv1_DF_clean = csv1_DF[["Country Name", "Country Code", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]].copy()
-    csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
+    #csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
     csv1_DF_clean = csv1_DF_clean.drop([62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
     csv1_DF_clean.head()
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
@@ -159,7 +167,7 @@ def clean_data_2012(csv1, csv2):
     '''
     csv1_DF = pd.read_csv(csv1, header=2)
     csv1_DF_clean = csv1_DF[["Country Name", "Country Code", "2012"]].copy()
-    csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
+    #csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
     csv1_DF_clean = csv1_DF_clean.drop([62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
     csv1_DF_clean.head()
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
@@ -240,6 +248,11 @@ def return_data_2012():
         singledict[data["Country Name"]] = data[2:]
         list_of_dicts.append(singledict)
     return jsonify(list_of_dicts)
+
+##@app.route('/testing')
+##def tester():
+##    scrape_deaths()
+##    return str("done")
 
 #?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
 #? * * * * * * * * * * * * * * * * * * * / Debugging Stuffs / * * * * * * * * * * * * * * * * * * * *@
