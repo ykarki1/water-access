@@ -146,11 +146,44 @@ def create_db(DF):
     engine = create_engine('sqlite:///water_data.sqlite', echo=True)
     DF.to_sql("water_data", con=engine, if_exists="replace")
     session = Session(engine)
-    test = session.execute("select * from water_data")
+    sqldata = session.execute("select * from water_data")
     #for item in test:
     #    print(item)
     #    print("\n")
-    return test
+    return sqldata
+
+#????
+def clean_data_2012(csv1, csv2):
+    '''
+        csvs are cleaned into dataframes, merged into one encompassing
+    '''
+    csv1_DF = pd.read_csv(csv1, header=2)
+    csv1_DF_clean = csv1_DF[["Country Name", "Country Code", "2012"]].copy()
+    csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
+    csv1_DF_clean = csv1_DF_clean.drop([62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
+    csv1_DF_clean.head()
+    #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+    csv2_DF = pd.read_csv(csv2)
+    csv2_DF_clean = csv2_DF.drop(["Unnamed: 5"], axis=1).dropna(axis=0)
+    csv2_DF_clean.head()
+    #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+    DF = pd.merge(csv1_DF_clean, csv2_DF_clean, on="Country Code", how="left")
+    DF = DF.drop(["Region", "SpecialNotes", "TableName"], axis=1).copy()
+    DF.to_csv("water_data_2012.csv")
+    DF.head()
+    #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+    return DF
+
+def create_db_2012(DF):
+    '''
+        sqlite db is created from the cleaned and combined DataFrame
+    '''
+    engine = create_engine('sqlite:///water_data_2012.sqlite', echo=True)
+    DF.to_sql("water_data_2012", con=engine, if_exists="replace")
+    session = Session(engine)
+    sqldata = session.execute("select * from water_data_2012")
+    return sqldata
+#????
 
 #!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
@@ -163,30 +196,50 @@ def create_db(DF):
 #!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8
 app = init_global_flask()
 
+def do_all_the_things_2012():
+    #scrape_worldbank()
+    slash = get_slash()
+    data_loc, data_dir = declare_locs(slash)
+    extract(data_loc, data_dir)
+    csv1, csv2 = declare_csvs(data_dir)
+    DF = clean_data_2012(csv1, csv2)
+    sqldata = create_db_2012(DF)
+    return sqldata
+
 def do_all_the_things():
-    scrape_worldbank()
+    #scrape_worldbank()
     slash = get_slash()
     data_loc, data_dir = declare_locs(slash)
     extract(data_loc, data_dir)
     csv1, csv2 = declare_csvs(data_dir)
     DF = clean_data(csv1, csv2)
-    test = create_db(DF)
-    return test
+    sqldata = create_db(DF)
+    return sqldata
 
 
 @app.route('/')
 def index():
     return render_template("index.html")
 
-@app.route('/data')
-def return_data():
+@app.route('/data_all')
+def return_data_all():
     all_data = do_all_the_things()
-    dicttest = []
+    list_of_dicts = []
     for data in all_data:
-        emptydict = {}
-        emptydict[data["Country Name"]] = data[2:]
-        dicttest.append(emptydict)
-    return jsonify(dicttest)
+        singledict = {}
+        singledict[data["Country Name"]] = data[2:]
+        list_of_dicts.append(singledict)
+    return jsonify(list_of_dicts)
+
+@app.route('/data_2012')
+def return_data_2012():
+    all_data = do_all_the_things_2012()
+    list_of_dicts = []
+    for data in all_data:
+        singledict = {}
+        singledict[data["Country Name"]] = data[2:]
+        list_of_dicts.append(singledict)
+    return jsonify(list_of_dicts)
 
 #?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
 #? * * * * * * * * * * * * * * * * * * * / Debugging Stuffs / * * * * * * * * * * * * * * * * * * * *@
