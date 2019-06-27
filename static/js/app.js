@@ -107,7 +107,7 @@ function filterPlot() {
 
 function year(year) {
 Plotly.d3.csv(
-  "https://gist.githubusercontent.com/galadREAL/5f3fe2d809e04cb413dd73dad7362c4b/raw/c9084c44059d4599d66186675ddcab599e0f0012/water_data.csv",
+  "https://raw.githubusercontent.com/ykarki1/water-access/master/water_data.csv",
   function(err, rows) {
     function unpack(rows, key) {
       return rows.map(function(row) {
