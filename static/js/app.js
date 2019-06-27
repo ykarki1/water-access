@@ -2,17 +2,19 @@ AOS.init();
 
 // Create the country dropdown menu
 var countrySelector = d3.select("#selCountry");
-var yearSelector = d3.select("#yearSelector");
-
+var countrySelector2 = d3.select("#selCountry2");
 function countries() {
   var countries = data.map(data => data.entity).sort();
   var uniqueCountries = [...new Set(countries)];
   uniqueCountries.forEach(element => {
     var row = countrySelector.append("option");
+    var row2 = countrySelector2.append("option");
     row.text(element);
+    row2.text(element);
   });
-};
-
+}
+// Create the year dropdown menu
+var yearSelector = d3.select("#yearSelector");
 function createYears() {
   var year = data.map(data => data.year).sort();
   var uniqueYear = [...new Set(year)];
@@ -20,10 +22,11 @@ function createYears() {
     var row = yearSelector.append("option");
     row.text(element);
   });
+  return uniqueYear;
 }
 
-function filterPlot() {
-  var selectedCountry = countrySelector.property("value");
+function filterPlot(div, selector) {
+  var selectedCountry = selector.property("value");
   var countryData = window.data.filter(
     data => data.entity == `${selectedCountry}`
   );
@@ -40,34 +43,39 @@ function filterPlot() {
     x.push(element.year);
   });
 
-  var atLeastBasic = {
+  var atLeastBasicTrace = {
     x: x,
     y: atLeastBasic,
     name: "At Least Basic",
     type: "bar"
   };
 
-  var limited = {
+  var limitedTrace = {
     x: x,
     y: limited,
     name: "Limited",
     type: "bar"
   };
 
-  var unimproved = {
+  var unimprovedTrace = {
     x: x,
     y: unimproved,
     name: "Unimproved",
     type: "bar"
   };
 
-  var surfaceWater = {
+  var surfaceWaterTrace = {
     x: x,
     y: surfaceWater,
     name: "Surface Water",
     type: "bar"
   };
-  var data = [atLeastBasic, limited, unimproved, surfaceWater];
+  var data = [
+    atLeastBasicTrace,
+    limitedTrace,
+    unimprovedTrace,
+    surfaceWaterTrace
+  ];
 
   var layout = {
     title: {
@@ -101,12 +109,68 @@ function filterPlot() {
     },
     barmode: "stack"
   };
+  
+  Plotly.newPlot(div, data, layout, { responsive: true });
+  line();
+}
 
-  Plotly.newPlot("myDiv", data, layout, { responsive: true });
+countries();
+filterPlot("myDiv", countrySelector);
+filterPlot("myDiv2", countrySelector2);
+allYears = createYears();
+year(2000);
+function line() {
+  var traces = [];
+  var countries = [
+    countrySelector.property("value"),
+    countrySelector2.property("value")
+  ];
+  countries.forEach(country => {
+    var countryData = window.data.filter(data => data.entity == `${country}`);
+    var atLeastBasic = [];
+    var x = [];
+    countryData.forEach(element => {
+      atLeastBasic.push(element.atLeastBasic);
+      x.push(element.year);
+    });
+    var trace = {
+      x: x,
+      y: atLeastBasic,
+      type: "scatter",
+      name: `${country}`
+    };
+    traces.push(trace);
+  });
+
+  var layout1 = {
+    title: "At least basic drinking water coverage",
+    showlegend: true
+  };
+  
+  Plotly.newPlot("line", traces, layout1, { responsive: true });
+}
+
+
+var steps = [];
+for (let i = 0; i < allYears.length; i++) {
+  const element = allYears[i];
+  var step = {
+    label: element,
+    method: "animate",
+    args: [
+      [element],
+      {
+        mode: "immediate",
+        frame: { redraw: false, duration: 500 },
+        transition: { duration: 500 }
+      }
+    ]
+  };
+  steps.push(step);
 }
 
 function year(year) {
-Plotly.d3.csv(
+  Plotly.d3.csv(
   "https://raw.githubusercontent.com/ykarki1/water-access/master/water_data.csv",
   function(err, rows) {
     function unpack(rows, key) {
@@ -125,7 +189,7 @@ Plotly.d3.csv(
       }
     ];
     console.log(data);
-
+    
     var layout = {
       title: "Access to Clean Water by Country",
       geo: {
@@ -139,8 +203,5 @@ Plotly.d3.csv(
 );
 };
 
+
 // run filterPlot with 'world' as the selectedCountry to produce the initial bar chart
-countries();
-filterPlot();
-createYears();
-year(2015)

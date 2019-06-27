@@ -31,14 +31,38 @@
 <br />
 
 <section id="chartSection">
-  <div data-aos="zoom-in" id="myDiv"></div>
-  <div id="countrySelector" class="container">
-    <label for="country">Select a country</label>
-    <select id="selCountry" onchange="filterPlot()">
-      <option value="World" selected disabled hidden>World</option>
-    </select>
+  <div class="container-fluid">
+    <div class="row">
+      <div data-aos="zoom-in" id="myDiv" class="col"></div>
+
+      <div data-aos="zoom-in" id="myDiv2" class="col"></div>
+    </div>
   </div>
+  <div class="container">
+    <div class="row">
+      <div id="countrySelector" class="container col">
+        <label for="country">Select a country</label>
+        <select id="selCountry" onchange="filterPlot('myDiv', countrySelector)">
+          <option value="World" selected disabled hidden>World</option>
+        </select>
+      </div>
+
+      <div id="countrySelector" class="container col">
+        <label for="country">Select a country</label>
+        <select
+          id="selCountry2"
+          onchange="filterPlot('myDiv2', countrySelector2)"
+        >
+          <option value="United States" selected disabled hidden
+            >United States</option
+          >
+        </select>
+      </div>
+    </div>
+  </div>
+  <div id="line"></div>
 </section>
+
 
 <section>
   <div data-aos="zoom-in" id="choropleth"></div>

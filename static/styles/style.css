@@ -21,9 +21,6 @@ body {
   padding: 15px;
 }
 
-#selCountry {
-  background-color: rgb(255, 255, 255);
-}
 
 #choropleth .svg-container {
   width: 100%;
