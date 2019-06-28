@@ -109,7 +109,7 @@ function filterPlot(div, selector) {
     },
     barmode: "stack"
   };
-  
+
   Plotly.newPlot(div, data, layout, { responsive: true });
   line();
 }
@@ -118,7 +118,8 @@ countries();
 filterPlot("myDiv", countrySelector);
 filterPlot("myDiv2", countrySelector2);
 allYears = createYears();
-year(2000);
+year();
+
 function line() {
   var traces = [];
   var countries = [
@@ -146,10 +147,9 @@ function line() {
     title: "At least basic drinking water coverage",
     showlegend: true
   };
-  
+
   Plotly.newPlot("line", traces, layout1, { responsive: true });
 }
-
 
 var steps = [];
 for (let i = 0; i < allYears.length; i++) {
@@ -161,7 +161,7 @@ for (let i = 0; i < allYears.length; i++) {
       [element],
       {
         mode: "immediate",
-        frame: { redraw: false, duration: 500 },
+        frame: { redraw: true, duration: 500 },
         transition: { duration: 500 }
       }
     ]
@@ -169,39 +169,98 @@ for (let i = 0; i < allYears.length; i++) {
   steps.push(step);
 }
 
-function year(year) {
+function year() {
   Plotly.d3.csv(
-  "https://raw.githubusercontent.com/ykarki1/water-access/master/water_data.csv",
-  function(err, rows) {
-    function unpack(rows, key) {
-      return rows.map(function(row) {
-        return row[key];
+    "https://raw.githubusercontent.com/ykarki1/water-access/master/water_data.csv",
+    function(err, rows) {
+      function unpack(rows, key) {
+        return rows.map(function(row) {
+          return row[key];
+        });
+      }
+      var frames = [];
+      for (let i = 0; i < allYears.length; i++) {
+        const element = allYears[i];
+        var frame = {
+          name: element,
+          data: [
+            {
+              z: unpack(rows, element)
+            }
+          ]
+        };
+        frames.push(frame);
+      }
+
+      Plotly.plot("choropleth", {
+        data: [
+          {
+            type: "choropleth",
+            locationmode: "Country Name",
+            locations: unpack(rows, "Country Code"),
+            z: unpack(rows, 2000),
+            text: unpack(rows, "Country Code"),
+            autocolorscale: true
+          }
+        ],
+        layout: {
+          title: "Access to Clean Water by Country",
+          geo: {
+            projection: {
+              type: "Hammer"
+            }
+          },
+          sliders: [
+            {
+              pad: { t: 30 },
+              x: 0.2,
+              len: 0.95,
+              currentvalue: {
+                xanchor: "right",
+                prefix: "Year: ",
+                font: {
+                  color: "#888",
+                  size: 20
+                }
+              },
+              transition: { duration: 0 },
+              // By default, animate commands are bound to the most recently animated frame:
+              steps: steps
+            }
+          ],
+          updatemenus: [
+            {
+              type: "buttons",
+              showactive: false,
+              x: 0.05,
+              y: 0,
+              xanchor: "right",
+              yanchor: "top",
+              pad: { t: 60, r: 20 },
+              buttons: [
+                {
+                  label: "Play",
+                  method: "animate",
+                  args: [
+                    null,
+                    {
+                      fromcurrent: true,
+                      frame: { redraw: false, duration: 1000 },
+                      transition: { duration: 500 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        // The slider itself does not contain any notion of timing, so animating a slider
+        // must be accomplished through a sequence of frames. Here we'll change the color
+        // and the data of a single trace:
+        frames: frames
       });
     }
-    var data = [
-      {
-        type: "choropleth",
-        locationmode: "Country Name",
-        locations: unpack(rows, "Country Code"),
-        z: unpack(rows, year),
-        text: unpack(rows, "Country Code"),
-        autocolorscale: true
-      }
-    ];
-    console.log(data);
-    
-    var layout = {
-      title: "Access to Clean Water by Country",
-      geo: {
-        projection: {
-          type: "Hammer"
-        }
-      }
-    };
-    Plotly.newPlot("choropleth", data, layout, { showLink: false });
-  }
-);
-};
-
+  );
+}
 
 // run filterPlot with 'world' as the selectedCountry to produce the initial bar chart
