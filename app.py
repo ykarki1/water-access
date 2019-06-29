@@ -249,6 +249,12 @@ def testhook():
     sqldata = session.execute("select * from water_data_2012")
     return sqldata
 
+def testhook2():
+    engine = create_engine('sqlite:///water_data.sqlite', echo=True)
+    session = Session(engine)
+    sqldata = session.execute("select * from water_data")
+    return sqldata
+
 
 @app.route('/')
 def index():
@@ -257,7 +263,8 @@ def index():
 
 @app.route('/data_all')
 def return_data_all():
-    all_data = do_all_the_things()
+    #all_data = do_all_the_things()
+    all_data = testhook2()
     list_of_dicts = []
     for data in all_data:
         singledict = {}
