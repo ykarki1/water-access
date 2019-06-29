@@ -5,27 +5,27 @@
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 # *                                                                                               * #
-#? * * * * * * * * * * * * * * * * * / Water Access Project: Setup / * * * * * * * * * * * * * * * *@
+# ? * * * * * * * * * * * * * * * * * / Water Access Project: Setup / * * * * * * * * * * * * * * * *@
 # *                                                                                               * #
 # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 #!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8
 
-#?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
-#? * * * * * * * * * * * * * * * / Dependencies + Decleration Methods / * * * * * * * * * * * * * * *@
-#? - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - @
+# ?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
+# ? * * * * * * * * * * * * * * * / Dependencies + Decleration Methods / * * * * * * * * * * * * * * *@
+# ? - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - @
 
 import pandas as pd
 from splinter import Browser
 import time
 import os
 import subprocess
-#ansi colors package
-#import colors
+# ansi colors package
+# import colors
 import time
 import datetime
-#used with debugging
-#from rfc3339 import rfc3339
+# used with debugging
+# from rfc3339 import rfc3339
 from sqlalchemy import create_engine
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -38,7 +38,7 @@ from flask import Flask, redirect, url_for, render_template, g, request, jsonify
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 # *                                                                                               * #
-#? * * * * * * * * * * * * * * * * * / Auxillary Method Library / * * * * * * * * * * * * * * * * * @
+# ? * * * * * * * * * * * * * * * * * / Auxillary Method Library / * * * * * * * * * * * * * * * * * @
 # *                                                                                               * #
 # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
@@ -59,6 +59,7 @@ def init_splinter():
     browser = Browser('chrome', **executable_path, headless=False)
     return browser
 
+
 def init_global_flask():
     '''
         init_global_flask() initializes Flask to be used globally as a const among other programs,
@@ -67,6 +68,7 @@ def init_global_flask():
     app = Flask(__name__)
     ############################################
     return app
+
 
 def scrape_worldbank():
     '''
@@ -77,15 +79,17 @@ def scrape_worldbank():
     url = "http://api.worldbank.org/v2/en/indicator/SH.H2O.SMDW.ZS?downloadformat=csv"
     browser.visit(url)
 
-##????
-#def scrape_deaths():
+# ????
+# def scrape_deaths():
 #    browser = init_splinter()
 #    #browser.driver.minimize_window()
 #    browser.visit("https://ourworldindata.org/grapher/death-rate-unsafe-water-source?country=CAF")
 #    browser.find_by_xpath("/html/body/main/figure/div/div[4]/div/a")
-##????
+# ????
 
-#todo make this os.filepath.join instead
+# todo make this os.filepath.join instead
+
+
 def get_slash():
     '''
         Returns the correct slash for the os type (either forward or backwards).
@@ -95,6 +99,7 @@ def get_slash():
     elif (os.name == "nt"):
         slash = "\\"
     return slash
+
 
 def declare_locs(slash):
     '''
@@ -107,12 +112,14 @@ def declare_locs(slash):
     print(data_loc)
     return data_loc, data_dir
 
+
 def extract(data_loc, data_dir):
     '''
         extracts the .csvs from the .zip archive that was scraped from worldbank
     '''
     zf = zipfile.ZipFile(data_loc, 'r')
     zf.extractall(data_dir)
+
 
 def declare_csvs(data_dir):
     '''
@@ -126,14 +133,17 @@ def declare_csvs(data_dir):
     print(csv2)
     return csv1, csv2
 
+
 def clean_data(csv1, csv2):
     '''
         csvs are cleaned into dataframes, merged into one encompassing
     '''
     csv1_DF = pd.read_csv(csv1, header=2)
-    csv1_DF_clean = csv1_DF[["Country Name", "Country Code", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]].copy()
-    #csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
-    csv1_DF_clean = csv1_DF_clean.drop([62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
+    csv1_DF_clean = csv1_DF[["Country Name", "Country Code", "2000", "2001", "2002", "2003", "2004",
+        "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]].copy()
+    # csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
+    csv1_DF_clean = csv1_DF_clean.drop(
+        [62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
     csv1_DF_clean.head()
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
     csv2_DF = pd.read_csv(csv2)
@@ -147,6 +157,7 @@ def clean_data(csv1, csv2):
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
     return DF
 
+
 def create_db(DF):
     '''
         sqlite db is created from the cleaned and combined DataFrame
@@ -155,20 +166,23 @@ def create_db(DF):
     DF.to_sql("water_data", con=engine, if_exists="replace")
     session = Session(engine)
     sqldata = session.execute("select * from water_data")
-    #for item in test:
+    # for item in test:
     #    print(item)
     #    print("\n")
     return sqldata
 
-#????
+# ????
+
+
 def clean_data_2012(csv1, csv2):
     '''
         csvs are cleaned into dataframes, merged into one encompassing
     '''
     csv1_DF = pd.read_csv(csv1, header=2)
     csv1_DF_clean = csv1_DF[["Country Name", "Country Code", "2012"]].copy()
-    #csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
-    csv1_DF_clean = csv1_DF_clean.drop([62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
+    # csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
+    csv1_DF_clean = csv1_DF_clean.drop(
+        [62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
     csv1_DF_clean.head()
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
     csv2_DF = pd.read_csv(csv2)
@@ -182,6 +196,7 @@ def clean_data_2012(csv1, csv2):
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*##*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
     return DF
 
+
 def create_db_2012(DF):
     '''
         sqlite db is created from the cleaned and combined DataFrame
@@ -191,21 +206,23 @@ def create_db_2012(DF):
     session = Session(engine)
     sqldata = session.execute("select * from water_data_2012")
     return sqldata
-#????
+# ????
+
 
 #!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 # *                                                                                               * #
-#? * * * * * * * * * * * * * * * * * / Primary Method Library / * * * * * * * * * * * * * * * * * @
+# ? * * * * * * * * * * * * * * * * * / Primary Method Library / * * * * * * * * * * * * * * * * * @
 # *                                                                                               * #
 # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * # * #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 #!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8!8
 app = init_global_flask()
 
+
 def do_all_the_things_2012():
-    #scrape_worldbank()
+    # scrape_worldbank()
     slash = get_slash()
     data_loc, data_dir = declare_locs(slash)
     extract(data_loc, data_dir)
@@ -214,8 +231,9 @@ def do_all_the_things_2012():
     sqldata = create_db_2012(DF)
     return sqldata
 
+
 def do_all_the_things():
-    #scrape_worldbank()
+    # scrape_worldbank()
     slash = get_slash()
     data_loc, data_dir = declare_locs(slash)
     extract(data_loc, data_dir)
@@ -223,6 +241,7 @@ def do_all_the_things():
     DF = clean_data(csv1, csv2)
     sqldata = create_db(DF)
     return sqldata
+
 
 def testhook():
      engine = create_engine('sqlite:///water_data_2012.sqlite', echo=True)
@@ -246,7 +265,7 @@ def return_data_all():
 
 @app.route('/data_2012')
 def return_data_2012():
-    #all_data = do_all_the_things_2012()
+    # all_data = do_all_the_things_2012()
     all_data = testhook()
     list_of_dicts = []
     for data in all_data:
@@ -255,14 +274,14 @@ def return_data_2012():
         list_of_dicts.append(singledict)
     return jsonify(list_of_dicts)
 
-##@app.route('/testing')
-##def tester():
-##    scrape_deaths()
-##    return str("done")
+# @app.route('/testing')
+# def tester():
+# scrape_deaths()
+# return str("done")
 
-#?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
-#? * * * * * * * * * * * * * * * * * * * / Debugging Stuffs / * * * * * * * * * * * * * * * * * * * *@
-#? - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - @
+# ?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
+# ? * * * * * * * * * * * * * * * * * * * / Debugging Stuffs / * * * * * * * * * * * * * * * * * * * *@
+# ? - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - @
 '''
 @app.before_request
 def start_timer():
