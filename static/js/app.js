@@ -228,31 +228,32 @@ function year() {
               steps: steps
             }
           ],
-          updatemenus: [
-            {
-              type: "buttons",
-              showactive: false,
-              x: 0.05,
-              y: 0,
-              xanchor: "right",
-              yanchor: "top",
-              pad: { t: 60, r: 20 },
-              buttons: [
-                {
-                  label: "Play",
-                  method: "animate",
-                  args: [
-                    null,
-                    {
-                      fromcurrent: true,
-                      frame: { redraw: false, duration: 1000 },
-                      transition: { duration: 500 }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          updatemenus: [{
+            type: 'buttons',
+            showactive: false,
+            x: 0.3,
+            y: 0.3,
+            xanchor: 'right',
+            yanchor: 'top',
+            direction: 'left',
+            pad: {t: 60, r: 20},
+            buttons: [{
+              label: 'Play',
+              method: 'animate',
+              args: [null, {
+                fromcurrent: true,
+                frame: {redraw: true, duration: 1000},
+                transition: {duration: 500}
+              }]
+            }, {
+              label: 'Pause',
+              method: 'animate',
+              args: [[null], {
+                mode: 'immediate',
+                frame: {redraw: true, duration: 0}
+              }]
+            }]
+          }]
         },
         // The slider itself does not contain any notion of timing, so animating a slider
         // must be accomplished through a sequence of frames. Here we'll change the color
