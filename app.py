@@ -140,7 +140,7 @@ def clean_data(csv1, csv2):
     '''
     csv1_DF = pd.read_csv(csv1, header=2)
     csv1_DF_clean = csv1_DF[["Country Name", "Country Code", "2000", "2001", "2002", "2003", "2004",
-        "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]].copy()
+                             "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015"]].copy()
     # csv1_DF_clean = csv1_DF_clean.dropna(axis=0)
     csv1_DF_clean = csv1_DF_clean.drop(
         [62, 63, 229, 215, 151, 71, 132, 93, 103, 257], axis=0)
@@ -244,14 +244,16 @@ def do_all_the_things():
 
 
 def testhook():
-     engine = create_engine('sqlite:///water_data_2012.sqlite', echo=True)
+    engine = create_engine('sqlite:///water_data_2012.sqlite', echo=True)
     session = Session(engine)
     sqldata = session.execute("select * from water_data_2012")
     return sqldata
 
+
 @app.route('/')
 def index():
     return render_template("index.html")
+
 
 @app.route('/data_all')
 def return_data_all():
@@ -262,6 +264,7 @@ def return_data_all():
         singledict[data["Country Name"]] = data[2:]
         list_of_dicts.append(singledict)
     return jsonify(list_of_dicts)
+
 
 @app.route('/data_2012')
 def return_data_2012():
@@ -278,6 +281,7 @@ def return_data_2012():
 # def tester():
 # scrape_deaths()
 # return str("done")
+
 
 # ?- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -@
 # ? * * * * * * * * * * * * * * * * * * * / Debugging Stuffs / * * * * * * * * * * * * * * * * * * * *@
