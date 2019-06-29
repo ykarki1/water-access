@@ -1,5 +1,5 @@
 // const dataAll_url = "http://127.0.0.1:5000/data_all";
-const data2012_url = "http://127.0.0.1:5000/data_2012"
+const data2012_url = "https://thristy2thrive.herokuapp.com/data_2012"
 
 // API calling and fetching the data from one of the flask routes
 d3.json(data2012_url).then(function(data) {
