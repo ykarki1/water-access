@@ -271,10 +271,10 @@ function year() {
 
 
 
-
+//! Spaar
 // These are the funcs that make the claim clickable, and reveals its truthfullness .onclick()
 function color0() {
-  clearColors("#slide3_verdict")
+  //clearColors("#slide3_verdict")
   d3.select("#slide0_verdict")
     .select("h6")
     .classed('bg-dark', false)
@@ -283,12 +283,13 @@ function color0() {
     .classed('border-light', true)
     .style('opacity', 1)
     .classed('py-4', true)
+    .classed('px-5', true)
     .classed('text-light', false)
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
 function color1() {
-  clearColors("#slide0_verdict")
+  //clearColors("#slide0_verdict")
   d3.select("#slide1_verdict")
     .select("h6")
     .classed('bg-dark', false)
@@ -302,7 +303,7 @@ function color1() {
   //d3.select(".carousel-control-next-icon")
 };
 function color2() {
-  clearColors("#slide1_verdict")
+  //clearColors("#slide1_verdict")
   d3.select("#slide2_verdict")
     .select("h6")
     .classed('bg-dark', false)
@@ -316,7 +317,7 @@ function color2() {
   //d3.select(".carousel-control-next-icon")
 };
 function color3() {
-  clearColors("#slide2_verdict")
+  //clearColors("#slide2_verdict")
   d3.select("#slide3_verdict")
     .select("h6")
     .classed('bg-dark', false)
@@ -338,8 +339,37 @@ function clearColors(prevSlideID) {
     .classed('bg-danger', false)
     .classed('border', false)
     .classed('border-light', false)
-    .style('opacity', .70)
+    .style('opacity', .00)
     .classed('py-4', false)
     .classed('text-light', true)
     .classed('text-white', false)
+};
+/*
+function clearVerdict(slideNumber) {
+  var SlideToHide = slideNumber;
+  switch (SlideToHide) {
+    case 0:
+      console.log("\nCase 0 received, hiding the first slide..\n")
+      d3.select("#verdictRow0")
+        .style('opacity', .00)
+      break;
+    case 3:
+      console.log("\nCase 3 received, hiding the first slide..\n")
+      d3.select("#verdictRow3")
+        .style('opacity', .00)
+      break;
+  }
+}
+*/
+function clearVerdict() {
+// select whieer slide is .active and make it visible, keep the others
+// hidden by default
+  //*sleep to ensure the active class has been applied after click
+  d3.select("#carousel-inner")
+    .select(".active")
+    //todo add ids to each carousel-inner
+    //todo impliment a case switch for which id is then in the selection
+    //todo each case will make the appropriate verdict clickers opacity changed
+    .style('opacity', .00)
+
 }
