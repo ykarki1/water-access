@@ -18,7 +18,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
-<body class="bg-dark text-light" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
+<body class="bg-dark text-light">
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
             <![endif]-->
@@ -27,10 +27,17 @@
         <a class="navbar-brand border border-secondary p-1" href="/">
             🚰
         </a>
+
         <!--"_title_" is replaced by inserted D3 script that reflects the current html page's title-->
-        <h2 class="navbar-item text-light nav mlr-auto" style="opacity: .82;">
-            _title_
-        </h2>
+        <ul class="nav justify-content-center mt-2">
+            <li class="nav-item active">
+                <h2 class="navbar-text text-light text-center" style="opacity: .81;">
+                    Spaar was here
+                </h2>
+            </li>
+        </ul>
+
+
         <!--This is the little hamburger menu when the screen size is changed to small-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +65,11 @@
             </ul>
         </div>
     </nav>
+
+    <div class="row container-fluid my-3 py-3" id="hackjob">
+        <div class="card bg-dark col-sm-12" style="visibility: hidden;">
+        </div>
+    </div>
 
     {% block firstblock %}
 

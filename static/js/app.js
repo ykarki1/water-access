@@ -265,3 +265,81 @@ function year() {
 }
 
 // run filterPlot with 'world' as the selectedCountry to produce the initial bar chart
+
+
+
+
+
+
+
+// These are the funcs that make the claim clickable, and reveals its truthfullness .onclick()
+function color0() {
+  clearColors("#slide3_verdict")
+  d3.select("#slide0_verdict")
+    .select("h6")
+    .classed('bg-dark', false)
+    .classed('bg-success', true)
+    .classed('border', true)
+    .classed('border-light', true)
+    .style('opacity', 1)
+    .classed('py-4', true)
+    .classed('text-light', false)
+    .classed('text-white', true)
+  //d3.select(".carousel-control-next-icon")
+};
+function color1() {
+  clearColors("#slide0_verdict")
+  d3.select("#slide1_verdict")
+    .select("h6")
+    .classed('bg-dark', false)
+    .classed('bg-danger', true)
+    .classed('border', true)
+    .classed('border-light', true)
+    .style('opacity', 1)
+    .classed('py-4', true)
+    .classed('text-light', false)
+    .classed('text-white', true)
+  //d3.select(".carousel-control-next-icon")
+};
+function color2() {
+  clearColors("#slide1_verdict")
+  d3.select("#slide2_verdict")
+    .select("h6")
+    .classed('bg-dark', false)
+    .classed('bg-warning', true)
+    .classed('border', true)
+    .classed('border-light', true)
+    .style('opacity', 1)
+    .classed('py-4', true)
+    .classed('text-light', false)
+    .classed('text-white', true)
+  //d3.select(".carousel-control-next-icon")
+};
+function color3() {
+  clearColors("#slide2_verdict")
+  d3.select("#slide3_verdict")
+    .select("h6")
+    .classed('bg-dark', false)
+    .classed('bg-success', true)
+    .classed('border', true)
+    .classed('border-light', true)
+    .style('opacity', 1)
+    .classed('py-4', true)
+    .classed('text-light', false)
+    .classed('text-white', true)
+  //d3.select(".carousel-control-next-icon")
+};
+function clearColors(prevSlideID) {
+  d3.select(prevSlideID)
+    .select("h6")
+    .classed('bg-dark', true)
+    .classed('bg-success', false)
+    .classed('bg-warning', false)
+    .classed('bg-danger', false)
+    .classed('border', false)
+    .classed('border-light', false)
+    .style('opacity', .70)
+    .classed('py-4', false)
+    .classed('text-light', true)
+    .classed('text-white', false)
+}
