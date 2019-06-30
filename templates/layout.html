@@ -22,31 +22,28 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
             <![endif]-->
-
+    <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark border border-secondary">
         <a class="navbar-brand border border-secondary p-1" href="/">
             🚰
         </a>
-
-        <h2 class="navbar-item text-light nav mlr-auto">
+        <!--"_title_" is replaced by inserted D3 script that reflects the current html page's title-->
+        <h2 class="navbar-item text-light nav mlr-auto" style="opacity: .82;">
             _title_
         </h2>
-
+        <!--This is the little hamburger menu when the screen size is changed to small-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+        <!--"Pages" dropdown menu-->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-
-
                     <a class="nav-link dropdown-toggle border border-secondary p-2 m-1" href="#" id="navbarDropdown"
                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Portfolio
+                        Pages
                     </a>
-
                     <div class="dropdown-menu bg-dark dropdown-menu dropdown-menu-lg-right border border-secondary"
                         aria-labelledby="navbarDropdown">
                         <a class="dropdown-item text-light" href="/claims">Charity:Water's Claims</a>
@@ -57,12 +54,9 @@
                         </div>
                         <a class="dropdown-item text-light" href="/">Home</a>
                     </div>
-
-
                 </li>
             </ul>
         </div>
-
     </nav>
 
     {% block firstblock %}
