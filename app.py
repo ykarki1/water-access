@@ -182,12 +182,12 @@ def create_db(DF):
 #
 def create_db_2012(DF):
     '''
-        A SQLite db is created from the cleaned and combined all-encompassing DataFrame - year 2012 only..
+        A SQLite db is created from the cleaned and combined all-encompassing DataFrame - year 2012 only.
     '''
     engine = create_engine('sqlite:///water_data_2012.sqlite', echo=True)
     DF.to_sql("water_data_2012", con=engine, if_exists="replace")
     session = Session(engine)
-    sqldata = session.execute("select * from water_data_2012")
+    sqldata = session.execute("SELECT * FROM water_data_2012")
     return sqldata
 #
 #
@@ -237,16 +237,16 @@ def do_all_the_things_2012():
 # ? - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - @
 #
 #
-def Return_2012_Only():
-    engine = create_engine('sqlite:///water_data_2012.sqlite', echo=True)
-    session = Session(engine)
-    sqldata = session.execute("select * from water_data_2012")
-    return sqldata
-#
 def Return_All_Years():
     engine = create_engine('sqlite:///water_data.sqlite', echo=True)
     session = Session(engine)
-    sqldata = session.execute("select * from water_data")
+    sqldata = session.execute("SELECT * FROM water_data")
+    return sqldata
+#
+def Return_2012_Only():
+    engine = create_engine('sqlite:///water_data_2012.sqlite', echo=True)
+    session = Session(engine)
+    sqldata = session.execute("SELECT * FROM water_data_2012")
     return sqldata
 #
 #
@@ -264,18 +264,30 @@ def index():
 #
 @app.route('/claims')
 def claims():
+    '''
+        Claims page is rendered.
+    '''
     return render_template("claims.html")
 #
 @app.route('/findings')
 def findings():
+    '''
+        Findings page is rendered.
+    '''
     return render_template("findings.html")
 #
 @app.route('/social')
 def social():
+    '''
+        Social feed page is rendered.
+    '''
     return render_template("social.html")
 #
 @app.route('/process')
 def process():
+    '''
+        Process page is rendered.
+    '''
     return render_template("process.html")
 #
 #
@@ -326,7 +338,7 @@ def data_2012():
 ####
 ######
 ########
-##########
+###############
 ########
 ######
 ####
@@ -386,4 +398,4 @@ def log_request(response):
 '''
 #
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
