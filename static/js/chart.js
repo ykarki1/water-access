@@ -69,11 +69,11 @@ d3.json(data2012_url).then(function(data) {
     ];
 
     let layout = {
-        title: 'Percentage of people using safely managed drinking water services',
+        title: 'Percentage of people using safely managed drinking water services in 2012',
         titlefont: { size:18 },
         font: {size: 11},
         hovermode:'closest',
-        xaxis:{zeroline:false, title: 'socio-economic category'},
+        xaxis:{zeroline:false, title: 'countries by socio-economic category'},
         yaxis:{zeroline:false, hoverformat: '.2r', title: '% of population'}
     };
 
