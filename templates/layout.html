@@ -28,24 +28,14 @@
             🚰
         </a>
 
+        <h2 class="navbar-item text-light nav mlr-auto">
+            _title_
+        </h2>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="navbar-brand border border-light p-1" id="test">
-            <script>
-                var x = document.getElementsByTagName("title")[0];
-                d3.select('body')
-                    .selectAll('div')
-                    .data(x.innerHTML)
-                    .enter()
-                    .append('div')
-                    .text(function (d) {
-                        return d;
-                    });
-            </script>
-        </div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
@@ -81,6 +71,13 @@
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript">
+        d3.select("h2")
+            .text(function () {
+                var title = document.getElementsByTagName("title")[0];
+                return title.innerHTML
+            });
+    </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{{url_for('static', filename='js/data.js')}}"></script>
     <script src="{{url_for('static', filename='js/app.js')}}"></script>
