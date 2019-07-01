@@ -441,8 +441,8 @@ function verdictExecute(arrow) {
     // if we're on the 0th slide, don't do any math on it like we do in the switcheroo
     //! this is buggy af
     if (slideIndex === 0) {
-      var slideID = (slideIndex);
-      console.log("\nslideID value: '" + slideID + "'...\n");
+      var slideID = parseInt(slideIndex);
+      console.log("\nThe slideIndex reads as '0'\n")
     } else {
       // case switcheroo depending on the arrowCase (which direction the user is navigating the slides)
       // the only difference is if we are adding or subtracting from the slideIndex that d3 gives us since
