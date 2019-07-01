@@ -1,21 +1,39 @@
 {% extends "layout.html" %} {% block firstblock %}
-<div class="jumbotron">
-  <h1 class="text-center display-4">Thirsty 2 Trive</h1>
-  <p class="text-center lead">Diving Into Charity:Water</p>
-  <hr class="my-4">
- 
-  <p class="text-center lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Watch the video</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Findings</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Social Feeds</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Process</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Take the Poll</a>
-
-  </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<section id="main_content">
+<div class="container">
+  <div class="jumbotron bg-transparent vertical-center">
+    <h1 class="text-center display-4"style="color: whitesmoke; font-size: 80px">Thirsty 2 Thrive</h1>
+    <p class="text-center lead">Diving Into Charity:Water</p>
+    <p class="text-center lead">Created in June of 2019 by Joe, Kayti, Spaar, and Yogi at UCBX Data Analytics Bootcamp</p>
+    <hr class="my-4">
+  </div>
+  <!-- <p class="text-center lead">
+    <a class="btn btn-primary btn-lg btn-light" href="#" role="button">Claims</a>
+    <a class="btn btn-primary btn-lg btn-light" href="#" role="button">Findings</a>
+    <a class="btn btn-primary btn-lg btn-light" href="#" role="button">Social</a>
+    <a class="btn btn-primary btn-lg btn-light" href="#" role="button">Process</a>
+    <a class="btn btn-primary btn-lg btn-light" href="#" role="button">Poll</a>
+    
+  </p> -->
+</section>
 </div>
 <section id="main">
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
+  <!-- <div class="jumbotron jumbotron-fluid"> -->
+    <div class="text-center container">
       <iframe
         data-aos="flip-left"
         title="vimeo-player"
@@ -26,7 +44,7 @@
         allowfullscreen
       ></iframe>
     </div>
-  </div>
+  <!-- </div> -->
 </section>
 
 <section id="infoSection">
@@ -60,7 +78,8 @@
           <option value="World" selected disabled hidden>World</option>
         </select>
       </div>
-
+      <br>
+      <br>
       <div id="countrySelector" class="container col">
         <label for="country">Select a country</label>
         <select
@@ -79,8 +98,10 @@
   </div>
   <div id="line"></div>
 </section>
-
-
+<br>
+<br>
+<br>
+<br>
 <section>
   <div data-aos="zoom-in" id="choropleth"></div>
 </section>
