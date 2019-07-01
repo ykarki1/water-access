@@ -277,7 +277,7 @@ function year() {
 //
 function colorFill_0() {
   //clearColors("")
-  d3.select("c-SV-0")
+  d3.select("#c-SV-0")
     .select("h6")
     .classed('bg-dark', false)
     //remove this after testing
@@ -285,7 +285,7 @@ function colorFill_0() {
     .classed('border', true)
     .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
+    .classed('py-2', true)
     .classed('px-5', true)
     .classed('text-light', false)
     .classed('text-white', true)
@@ -293,56 +293,56 @@ function colorFill_0() {
 };
 function colorFill_1() {
   //clearColors("")
-  d3.select("c-SV-1")
+  d3.select("#c-SV-1")
     .select("h6")
     .classed('bg-dark', false)
     .classed('bg-danger', true)
     .classed('border', true)
     .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
+    .classed('py-2', true)
     .classed('text-light', false)
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
 function colorFill_2() {
   //clearColors("")
-  d3.select("c-SV-2")
+  d3.select("#c-SV-2")
     .select("h6")
     .classed('bg-dark', false)
     .classed('bg-warning', true)
     .classed('border', true)
     .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
+    .classed('py-2', true)
     .classed('text-light', false)
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
 function colorFill_3() {
   //clearColors("")
-  d3.select("c-SV-3")
+  d3.select("#c-SV-3")
     .select("h6")
     .classed('bg-dark', false)
     .classed('bg-success', true)
     .classed('border', true)
     .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
+    .classed('py-2', true)
     .classed('text-light', false)
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
 function colorFill_4() {
   //clearColors("")
-  d3.select("c-SV-4")
+  d3.select("#c-SV-4")
     .select("h6")
     .classed('bg-dark', false)
     .classed('bg-success', true)
     .classed('border', true)
     .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
+    .classed('py-2', true)
     .classed('text-light', false)
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
@@ -366,7 +366,7 @@ function clearColors(SlideID) {
     .classed('border', false)
     .classed('border-light', false)
     .style('display', 'none')
-    .classed('py-4', false)
+    .classed('py-2', false)
     .classed('text-light', true)
     .classed('text-white', false)
 };
@@ -378,70 +378,114 @@ function clearColors(SlideID) {
 
 
 
-//todo:::       1) Figure out the currently .active carousel-indicator ID
 
-//todo:::       2) Match that to the corresponding carousel-SlideVerdict-ID, then... (case switcheroo?)
 
 //todo:::       3) D3.classed('display', '___') for the appropriate carousel-SlideVerdict-ID, and all
 //todo          others are set to display:none; ----- maybe make all display:none; then activate just the
 //todo          one desired each event?
 
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //! ///////////////////////////////////////////////////////////////////////////////////////////////////// !//
 //!                                                                                                       !//
-//!                                     Library of Failures: Claims                                       !//
+//!                                  Spaar's Abhorrent JS: Claims.html                                    !//
 //!                                                                                                       !//
 //! ///////////////////////////////////////////////////////////////////////////////////////////////////// !//
 //--------------------------------------------------------------------------------------------------------//
-//!   Hopes:::     D3.js to return the slide ID if class in('.active').
-//!   Result:::    It executes too fast and returns the wrong value (Slide previous to the .active).
-//
-//? If there are no other options, I'll go this route with a mega hacky arrowCase switcheroo to add
-//? or subtract 1 to or from the slide's ID value. Would need to desable indicator functionality too.
 //
 //
-//* This "time.sleep()" method did not work, it still executes one slide behind the desired slide.
+function getPreviousObject() {
+  let previousSlideObj = d3.select(".carousel-indicators").select(".active");
+  return previousSlideObj
+};
 //
-//* Calling this as a .onchange() within the carousel-indicators did not execute when class was changed.
+function debuggingWhatnot(activeSlideObj) {
+  console.log("Active Carousel Slide ID: " + activeSlideObj._groups[0][0].attributes[2].nodeValue + "\n");
+};
 //
-/*
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
+function killVerdictDisplays() {
+  var Zeroth = d3.select("");
+  var First = d3.select("");
+  var Second = d3.select("");
+  var Third = d3.select("");
+  var Fourth = d3.select("")
+};
+//
+//
+//
+//todo    better comments, change vars to lets || change vars to consts where possible
+//*    verdictExecute(arrow) parses/loads/etc the correct Verdict
+function verdictExecute(arrow) {
+  // turn the import into global var called arrowCase/
+  var arrowCase = arrow;
+  // if arrowCase is a bad cast, shit the bed
+  if (arrowCase === null) {
+    alert("[!] Received arrowCase was null: '" + arrowCase + "'");
+    console.error("\n[!] Received arrowCase was invalid: " + arrowCase + "\n");
+  } else {
+    // d3 selects what /it/ thinks is the currently .active slide object
+    var previousSlideObj = getPreviousObject();
+    // dig down way deep to get dat nodeValue and return it as an int
+    var slideIndex = parseInt(previousSlideObj._groups[0][0].attributes[2].nodeValue);
+    // if we're on the 0th slide, don't do any math on it like we do in the switcheroo
+    if (slideIndex === 0) {
+      var slideID = (slideIndex);
+      console.log("\nslideID value: '" + slideID + "'...\n");
+    } else {
+      // case switcheroo depending on the arrowCase (which direction the user is navigating the slides)
+      // the only difference is if we are adding or subtracting from the slideIndex that d3 gives us since
+      // I can't figure out how to lag it to read the correct and current slide's value over the previous.
+      switch (arrowCase) {
+        // for "Prev" (navigating backwards on the carousel slides)
+        //!    1) make sure all the   ~carousel-SlideVerdict-${slideID}~   items have   ~display:none;~   set up each time.
+        //!    2) change the   ~display:none;~   back to default for whichever   ~carousel-SlideVerdict-${slideID}~   correlates.
+        //!    3) account for what happens going between the 0th and 4th slide re: +-1 math on slideIndex >> slideID
+        case 'prev':
+          console.log("\nAccepted arrowCase of: '" + arrowCase + "' received...\n");
+          console.log("\nLength of arrowCase: '" + arrowCase.length + "'...\n");
+          console.log("\n'[<< PREV]' subtracting 1 from the slideBase...\n\n\n\n-----------------------------------\n\n\n");
+          // subtract 1 to from Index and make that the slideID global var
+          var slideID = (slideIndex - 1);
+          console.log("\nActive slideID: '" + slideID + "'\n")
+
+
+
+          break;
+        // for "Next" (navigating forwardss on the carousel slides)
+        case 'next':
+          console.log("\nAccepted arrowCase of: '" + arrowCase + "' received...\n");
+          console.log("\nLength of arrowCase: '" + arrowCase.length + "'...\n");
+          console.log("\n'[NEXT >>]' adding 1 to the slideBase...\n\n\n\n-----------------------------------\n\n\n");
+          // add 1 to the Index and make that the slideID global var
+          var slideID = (slideIndex + 1);
+          console.log("\nActive slideID: '" + slideID + "'\n")
+
+
+
+          break;
+      };
     };
   };
 };
 
-function one() {
-  sleep(0);
-};
 
-function two() {
-  let activeSlideObj = d3.select(".carousel-indicators").select(".active");
-  return activeSlideObj
-};
 
-function three(activeSlideObj) {
-  console.log("Active Carousel Slide ID: " + activeSlideObj._groups[0][0].attributes[2].nodeValue + "\n");
-  alert("Active Carousel Slide ID: " + activeSlideObj._groups[0][0].attributes[2].nodeValue);
-};
 
-function verdictExecute() {
-  one();
-  var activeSlideObj = two();
-  three(activeSlideObj);
-};
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //--------------------------------------------------------------------------------------------------------//
 //
 //--------------------------------------------------------------------------------------------------------//
