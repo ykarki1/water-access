@@ -376,14 +376,6 @@ function clearColors(SlideID) {
 
 
 
-
-
-
-
-//todo:::       3) D3.classed('display', '___') for the appropriate carousel-SlideVerdict-ID, and all
-//todo          others are set to display:none; ----- maybe make all display:none; then activate just the
-//todo          one desired each event?
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //! ///////////////////////////////////////////////////////////////////////////////////////////////////// !//
@@ -404,11 +396,16 @@ function debuggingWhatnot(activeSlideObj) {
 };
 //
 function killVerdictDisplays() {
-  var Zeroth = d3.select("");
-  var First = d3.select("");
-  var Second = d3.select("");
-  var Third = d3.select("");
-  var Fourth = d3.select("")
+  //var Zeroth =
+    d3.select("#carousel-SlideVerdict-0").classed('display', 'none');
+  //var First =
+    d3.select("#carousel-SlideVerdict-1").classed('display', 'none');
+  //var Second =
+    d3.select("#carousel-SlideVerdict-2").classed('display', 'none');
+  //var Third =
+    d3.select("#carousel-SlideVerdict-3").classed('display', 'none');
+  //var Fourth =
+    d3.select("#carousel-SlideVerdict-4").classed('display', 'none');
 };
 //
 //
@@ -416,6 +413,7 @@ function killVerdictDisplays() {
 //todo    better comments, change vars to lets || change vars to consts where possible
 //*    verdictExecute(arrow) parses/loads/etc the correct Verdict
 function verdictExecute(arrow) {
+  killVerdictDisplays();
   // turn the import into global var called arrowCase/
   var arrowCase = arrow;
   // if arrowCase is a bad cast, shit the bed
@@ -428,6 +426,7 @@ function verdictExecute(arrow) {
     // dig down way deep to get dat nodeValue and return it as an int
     var slideIndex = parseInt(previousSlideObj._groups[0][0].attributes[2].nodeValue);
     // if we're on the 0th slide, don't do any math on it like we do in the switcheroo
+    //! this is buggy af
     if (slideIndex === 0) {
       var slideID = (slideIndex);
       console.log("\nslideID value: '" + slideID + "'...\n");
@@ -437,17 +436,22 @@ function verdictExecute(arrow) {
       // I can't figure out how to lag it to read the correct and current slide's value over the previous.
       switch (arrowCase) {
         // for "Prev" (navigating backwards on the carousel slides)
-        //!    1) make sure all the   ~carousel-SlideVerdict-${slideID}~   items have   ~display:none;~   set up each time.
-        //!    2) change the   ~display:none;~   back to default for whichever   ~carousel-SlideVerdict-${slideID}~   correlates.
+
         //!    3) account for what happens going between the 0th and 4th slide re: +-1 math on slideIndex >> slideID
+
         case 'prev':
           console.log("\nAccepted arrowCase of: '" + arrowCase + "' received...\n");
           console.log("\nLength of arrowCase: '" + arrowCase.length + "'...\n");
           console.log("\n'[<< PREV]' subtracting 1 from the slideBase...\n\n\n\n-----------------------------------\n\n\n");
           // subtract 1 to from Index and make that the slideID global var
-          var slideID = (slideIndex - 1);
-          console.log("\nActive slideID: '" + slideID + "'\n")
-
+          var slideID = parseInt(slideIndex - 1);
+          console.log("\nActive slideID: '" + slideID + "'\n");
+          // ensure all Verdicts are hidden in their absolute positions
+          killVerdictDisplays();
+          // assign a formatted string to a var using the target's ID and our current slideID
+          var activeVerdictID = ("#" + "carousel-SlideVerdict-" + slideID)
+          // select it with d3 then revert the display to an unset/default value
+          d3.select(activeVerdictID).style('display', 'unset');
 
 
           break;
@@ -457,9 +461,14 @@ function verdictExecute(arrow) {
           console.log("\nLength of arrowCase: '" + arrowCase.length + "'...\n");
           console.log("\n'[NEXT >>]' adding 1 to the slideBase...\n\n\n\n-----------------------------------\n\n\n");
           // add 1 to the Index and make that the slideID global var
-          var slideID = (slideIndex + 1);
-          console.log("\nActive slideID: '" + slideID + "'\n")
-
+          var slideID = parseInt(slideIndex + 1);
+          console.log("\nActive slideID: '" + slideID + "'\n");
+          // ensure all Verdicts are hidden in their absolute positions
+          killVerdictDisplays();
+          // assign a formatted string to a var using the target's ID and our current slideID
+          var activeVerdictID = ("#" + "carousel-SlideVerdict-" + slideID)
+          // select it with d3 then revert the display to an unset/default value
+          d3.select(activeVerdictID).style('display', 'unset')
 
 
           break;
