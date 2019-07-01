@@ -263,119 +263,117 @@ function year() {
     }
   );
 }
-
 // run filterPlot with 'world' as the selectedCountry to produce the initial bar chart
-
-
-
-
-
-
+//
+//
+//
+//
+//
 //! Spaar
 //* These are the funcs that make the claim clickable, and reveals the "Verdict" about it .onclick()
 //todo these should probably be refactored into just one case switcher or otherwise
 //
 function colorFill_0() {
-  //clearColors("")
-  d3.select("#c-SV-0")
+  clearColors("#c-SV-x")
+  clearColors("#c-SV-1")
+  //killVerdictDisplays();
+  d3.select("#c-SV-0-Parent")
+    .classed('border-secondary', false)
+    .classed('border-info', true)
+    .select("#c-SV-0")
     .select("h6")
-    .classed('bg-dark', false)
-    //remove this after testing
-    .classed('bg-info', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-2', true)
-    .classed('px-5', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-info', true)
 };
 function colorFill_1() {
-  //clearColors("")
-  d3.select("#c-SV-1")
+  clearColors("#c-SV-2")
+  clearColors("#c-SV-0")
+  //killVerdictDisplays();
+  d3.select("#c-SV-1-Parent")
+    .classed('border-secondary', false)
+    .classed('border-danger', true)
+    .select("#c-SV-1")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-danger', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-2', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-danger', true)
 };
 function colorFill_2() {
-  //clearColors("")
-  d3.select("#c-SV-2")
+  clearColors("#c-SV-3")
+  clearColors("#c-SV-1")
+  //killVerdictDisplays();
+  d3.select("#c-SV-2-Parent")
+    .classed('border-secondary', false)
+    .classed('border-warning', true)
+    .select("#c-SV-2")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-warning', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-2', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-warning', true)
 };
 function colorFill_3() {
-  //clearColors("")
-  d3.select("#c-SV-3")
+  clearColors("#c-SV-4")
+  clearColors("#c-SV-2")
+  //killVerdictDisplays();
+  d3.select("#c-SV-3-Parent")
+    .classed('border-secondary', false)
+    .classed('border-success', true)
+    .select("#c-SV-3")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-success', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-2', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-success', true)
 };
 function colorFill_4() {
-  //clearColors("")
-  d3.select("#c-SV-4")
+  clearColors("#c-SV-x")
+  clearColors("#c-SV-3")
+  //killVerdictDisplays();
+  d3.select("#c-SV-4-Parent")
+    .classed('border-secondary', false)
+    .classed('border-success', true)
+    .select("#c-SV-4")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-success', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-2', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-success', true)
 };
 //
-
-
-
-
-
-
-/*
-//* Remove all of the .onlick CSS mods applied to "Verdicts"
-function clearColors(SlideID) {
-  d3.select(SlideID)
+function colorFill_x() {
+  clearColors("#c-SV-4")
+  clearColors("#c-SV-0")
+  killVerdictDisplays_notX();
+  d3.select("#c-SV-x-Parent")
+    .classed('border-secondary', false)
+    .classed('border-info', true)
+    .select("#c-SV-x")
     .select("h6")
-    .classed('bg-dark', true)
-    .classed('bg-success', false)
-    .classed('bg-warning', false)
-    .classed('bg-danger', false)
-    .classed('border', false)
-    .classed('border-light', false)
-    .style('display', 'none')
-    .classed('py-2', false)
-    .classed('text-light', true)
-    .classed('text-white', false)
+    .style('opacity', 1)
+    .classed('text-light', false)
+    .classed('text-info', true)
 };
-*/
-
-
-
-
-
+//
+//* Remove all of CSS formatting applied to "Verdicts"
+function clearColors(SlideID) {
+  d3.select(SlideID + "-Parent")
+    // Parent level
+    .classed('border-secondary', true)
+    .classed('border-info', false)
+    .classed('border-danger', false)
+    .classed('border-warning', false)
+    .classed('border-success', false)
+    // Child level
+    .select(SlideID)
+    .select("h6")
+    .style('opacity', .70)
+    .classed('text-light', true)
+    .classed('text-info', false)
+    .classed('text-danger', false)
+    .classed('text-warning', false)
+    .classed('text-success', false)
+};
+//
+//
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //! ///////////////////////////////////////////////////////////////////////////////////////////////////// !//
@@ -396,16 +394,31 @@ function debuggingWhatnot(activeSlideObj) {
 };
 //
 function killVerdictDisplays() {
-  //var Zeroth =
-    d3.select("#carousel-SlideVerdict-0").classed('display', 'none');
-  //var First =
-    d3.select("#carousel-SlideVerdict-1").classed('display', 'none');
-  //var Second =
-    d3.select("#carousel-SlideVerdict-2").classed('display', 'none');
-  //var Third =
-    d3.select("#carousel-SlideVerdict-3").classed('display', 'none');
-  //var Fourth =
-    d3.select("#carousel-SlideVerdict-4").classed('display', 'none');
+  d3.select("#carousel-SlideVerdict-0")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-1")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-2")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-3")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-4")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-x")
+    .style('display', 'none');
+};
+//
+function killVerdictDisplays_notX() {
+  d3.select("#carousel-SlideVerdict-0")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-1")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-2")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-3")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-4")
+    .style('display', 'none');
 };
 //
 //
@@ -436,9 +449,6 @@ function verdictExecute(arrow) {
       // I can't figure out how to lag it to read the correct and current slide's value over the previous.
       switch (arrowCase) {
         // for "Prev" (navigating backwards on the carousel slides)
-
-        //!    3) account for what happens going between the 0th and 4th slide re: +-1 math on slideIndex >> slideID
-
         case 'prev':
           console.log("\nAccepted arrowCase of: '" + arrowCase + "' received...\n");
           console.log("\nLength of arrowCase: '" + arrowCase.length + "'...\n");
@@ -452,8 +462,6 @@ function verdictExecute(arrow) {
           var activeVerdictID = ("#" + "carousel-SlideVerdict-" + slideID)
           // select it with d3 then revert the display to an unset/default value
           d3.select(activeVerdictID).style('display', 'unset');
-
-
           break;
         // for "Next" (navigating forwardss on the carousel slides)
         case 'next':
@@ -469,33 +477,17 @@ function verdictExecute(arrow) {
           var activeVerdictID = ("#" + "carousel-SlideVerdict-" + slideID)
           // select it with d3 then revert the display to an unset/default value
           d3.select(activeVerdictID).style('display', 'unset')
-
-
           break;
       };
     };
   };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
+//
 //--------------------------------------------------------------------------------------------------------//
+//!!!!!!!!!!!!!!!    Below doesn't work but I am keeping it for now for reference    !!!!!!!!!!!!!!!!!
+//
+//
 //
 //--------------------------------------------------------------------------------------------------------//
 //!   Hopes:::     Custom event listeners will watch and report on any class changes from null to
