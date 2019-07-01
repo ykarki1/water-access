@@ -369,54 +369,41 @@ function clearColors(SlideID) {
 
 
 
+//todo   1) figure out the currently .active carousel-indicator ID
 
-function verdictExecute(arrowCase) {
-  if ((arrowCase) && (arrowCase != "prev") || (arrowCase != "next")) {
-    alert("[!] Received arrowCase was invalid: " + arrowCase);
-    console.warn("[!] Received arrowCase was invalid" + arrowCase);
-  } else {
-    //? get the currently .active slide
+//todo   2) match that to the corresponding carousel-SlideVerdict-ID, then... (case switcheroo?)
 
-    //? c
-    // put the arrows' locs into variables
-    // var arrowPrev = d3.select('.carousel-control-prev').select("#arrow-Prev");
-    // var arrowNext = d3.select('.carousel-control-next').select("#arrow-Next");
-    //* case switcher for the arrow received from the onclick
-    switch (arrowCase) {
-      case "prev":
-        console.log("\nArrow Case: " + arrowCase + " [<< PREV] received: Displaying new verdict and hiding all others...\n");
-        //!
-        //
-        //!
-        break;
-      case "next":
-        console.log("\nArrow Case: " + arrowCase + " [NEXT >>] received: Displaying new verdict and hiding all others...\n");
-        //!
-        //!
-        //!
-        break;
-    }
-  }
+//todo   3) d3.classed('display', '___') for the appropriate carousel-SlideVerdict-ID, and all
+//todo      others are set to display:none; ----- maybe make all display:none; then activate just the
+//todo      one desired each event?
+function verdictExecute() {
+  //? get the currently .active slide
+
+  let test = d3.select(".carousel-indicators").select(".active");
+  alert(test);
+  //console.log("test")
+  //console.log(test);
+  //console.log("test._groups]")
+  //console.log(test._groups)
+  //console.log("test._groups[0]")
+  //console.log(test._groups[0])
+  //console.log("test._groups[0][0]")
+  //console.log(test._groups[0][0])
+//
+  //console.log("test._groups[0][0].id")
+  //console.log(test._groups[0][0].id)
+//
+//
+//
+  //console.log("test._groups[0][0].attributes")
+  //console.log(test._groups[0][0].attributes)
+//
+  //console.log("test._groups[0][0].attributes[2]")
+  //console.log(test._groups[0][0].attributes[2])
+//
+  //! Works, but it is pulling to early and thus is a slide delayed...could hackjob fix by nerfing
+  //! the "Prev" carousel navigator arrow as well as the indicators' functionality
+  console.log("test._groups[0][0].attributes[2].nodeValue")
+  console.log(test._groups[0][0].attributes[2].nodeValue)
 }
 
-
-/*
-function clearVerdict(slideNumber) {
-  var SlideToHide = slideNumber;
-  switch (SlideToHide) {
-    case 0:
-      console.log("\nCase 0 received, hiding the first slide..\n")
-      d3.select("#verdictRow0")
-        .style('opacity', .00)
-      break;
-    case 3:
-      console.log("\nCase 3 received, hiding the first slide..\n")
-      d3.select("#verdictRow3")
-        .style('opacity', .00)
-      break;
-  }
-}
-*/
-    /////todo add ids to each carousel-inner
-    //todo impliment a case switch for which id is then in the selection
-    //todo each case will make the appropriate verdict clickers display .style changed
