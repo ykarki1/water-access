@@ -1,64 +1,159 @@
 {% extends "layout.html" %}
 
+
 {% block title %}
 Claims Made
 {% endblock %}
 
+
 {% block firstblock %}
 
-<div class="row container-fluid mt-5 ml-4 p-auto" id="claimsRow">
+
+
+
+
+<!--Fluid row to hold the carousel and its card.-->
+<div class="row container-fluid mt-5 ml-4 p-auto" id="claimsCarousel-Row">
+
+
     <!--Card for holding the carousel-->
     <div class="card text-secondary col-sm-11 border border-secondary" data-aos="zoom-in" data-aos-duration="750"
         style="background-color: rgb(46, 54, 59)">
+
+
         <!--Carousel-->
-        <div id="claimsCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-            <!--Current slide indication icons-->
+        <div id="claims-Carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+
+
+
+
+
+
+            <!--Current slide indication icons (horizontal lines on the bottom)-->
             <ol class="carousel-indicators">
-                <li data-target="#claimsCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#claimsCarousel" data-slide-to="1"></li>
-                <li data-target="#claimsCarousel" data-slide-to="2"></li>
-                <li data-target="#claimsCarousel" data-slide-to="3"></li>
+
+
+                <li id="carousel-IndicatorID-0" data-target="#claims-Carousel" data-slide-to="0" class="active"></li>
+
+
+                <li id="carousel-IndicatorID-1" data-target="#claims-Carousel" data-slide-to="1"></li>
+
+
+                <li id="carousel-IndicatorID-2" data-target="#claims-Carousel" data-slide-to="2"></li>
+
+
+                <li id="carousel-IndicatorID-3" data-target="#claims-Carousel" data-slide-to="3"></li>
+
+
+                <li id="carousel-IndicatorID-4" data-target="#claims-Carousel" data-slide-to="4"></li>
+
+
             </ol>
-            <!--All 4 slides used in the carousel-->
+
+
+
+
+
+
+            <!--All 5 carousel slide images-->
             <div class="carousel-inner py-3">
-                <div class="carousel-item active">
+
+
+                <div class="carousel-item active" id="carousel-SlideImage-0">
+                    <img src="/static/carousels/visual_aids/__general_h.d.r./medium/hdr_CeAf_3_16-9r.jpg"
+                        class="d-block w-100" alt="">
+                </div>
+
+
+                <div class="carousel-item" id="carousel-SlideImage-1">
                     <img src="/static/carousels/infographics/ImpactedPopulation_16-9r.png" class="d-block w-100"
                         alt="Impacted Population Infographic/VisualAid Combination">
                 </div>
-                <div class="carousel-item">
+
+
+                <div class="carousel-item" id="carousel-SlideImage-2">
                     <img src="/static/carousels/infographics/ImpactOnHealthWomenKids_16-9r.png" class="d-block w-100"
                         alt="Impacted Health and Socio-Econmic Infographic">
                 </div>
-                <div class="carousel-item">
+
+
+                <div class="carousel-item" id="carousel-SlideImage-3">
                     <img src="/static/carousels/visual_aids/__general_h.d.r./medium/hdr_CeAf_4_16-9r.jpg"
                         class="d-block w-100"
                         alt="Impacted Women Beginning Walk to Water Source Toting Buckets VisualAid">
                 </div>
-                <div class="carousel-item">
+
+
+                <div class="carousel-item" id="carousel-SlideImage-4">
                     <img src="/static/carousels/infographics/ImpactOnKids_0_16-9r.png" class="d-block w-100"
                         alt="Impacted Education of Children Infographic">
                 </div>
+
+
             </div>
-            <!--Carousel's side navigation arrows-->
-            <a class="carousel-control-prev" href="#claimsCarousel" role="button" data-slide="prev">
+
+
+
+
+
+
+            <!--Carousel's previous slide nav arrow -->
+            <a class="carousel-control-prev" id="arrow-Prev" href="#claims-Carousel" onclick="verdictExecute('prev')"
+                role=" button" data-slide="prev">
+
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#claimsCarousel" onclick="clearVerdict()" role="button"
-                data-slide="next">
+
+
+            <!--Carousel's next slide nav arrow -->
+            <a class="carousel-control-next" id="arrow-Next" href="#claims-Carousel" onclick="verdictExecute('next')"
+                role="button" data-slide="next">
+
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
+            </a>
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<!--New Verdict clickers-->
+<div class="row container-fluid mt-3 ml4 p-auto" id="carousel-SlideVerdict-0"
+    style="position: absolute; display: none;">
+    <div class="card border border-secondary mx-auto px-5 pt-2" data-aos="zoom-out" data-aos-duration="3000"
+        style="background-color: rgb(46, 54, 59)">
+        <div class="rounded-pill ml-auto">
+            <a class="text-light" id="c-SV-0" href="#" onclick="colorFill_0()">
+                <h6 class="bg-dark" style="opacity: .70;">
+                    View Charity:Water's Claims.
+                </h6>
             </a>
         </div>
     </div>
 </div>
 
-<!--New Verdict clickers-->
-<div class="row container-fluid mt-3 ml4 p-auto" id="verdictRow0">
+
+<div class="row container-fluid ml4 p-auto my-2" id="carousel-SlideVerdict-1"
+    style="position: absolute; display: none;">
     <div class="card border border-secondary mx-auto px-5 pt-2" data-aos="zoom-out" data-aos-duration="3000"
         style="background-color: rgb(46, 54, 59)">
         <div class="rounded-pill ml-auto">
-            <a class="text-light" id="slide0_verdict" href="#" onclick="color0()">
+            <a class="text-light" id="c-SV-1" href="#" onclick="colorFill_1()">
                 <h6 class="bg-dark" style="opacity: .70;">
                     633 million people in the world live without clean water.
                 </h6>
@@ -67,11 +162,13 @@ Claims Made
     </div>
 </div>
 
-<div class="row container-fluid ml4 p-auto" id="verdictRow1" style="opacity: .00;">
+
+<div class="row container-fluid ml4 p-auto my-2" id="carousel-SlideVerdict-2"
+    style="position: absolute; display: none;">
     <div class="card border border-secondary mx-auto px-5 pt-2" data-aos="zoom-out" data-aos-duration="3000"
         style="background-color: rgb(46, 54, 59)">
         <div class="rounded-pill ml-auto">
-            <a class="text-light" id="slide1_verdict" href="#" onclick="color1()">
+            <a class="text-light" id="c-SV-2" href="#" onclick="colorFill_2()">
                 <h6 class="bg-dark" style="opacity: .70;">
                     Diseases from dirty water kill more people every year than all forms of violence.
                 </h6>
@@ -80,11 +177,13 @@ Claims Made
     </div>
 </div>
 
-<div class="row container-fluid ml4 p-auto" id="verdictRow2" style="opacity: .00;">
+
+<div class="row container-fluid ml4 p-auto my-2" id="carousel-SlideVerdict-3"
+    style="position: absolute; display: none;">
     <div class="card border border-secondary mx-auto px-5 pt-2" data-aos="zoom-out" data-aos-duration="3000"
         style="background-color: rgb(46, 54, 59)">
         <div class="rounded-pill ml-auto">
-            <a class="text-light" id="slide2_verdict" href="#" onclick="color2()">
+            <a class="text-light" id="c-SV-3" href="#" onclick="colorFill_3()">
                 <h6 class="bg-dark" style="opacity: .70;">
                     The Earth has enough available water for everyone in need.
                 </h6>
@@ -93,11 +192,13 @@ Claims Made
     </div>
 </div>
 
-<div class="row container-fluid ml4 p-auto" id="verdictRow3" style="opacity: .00;">
+
+<div class="row container-fluid ml4 p-auto my-2" id="carousel-SlideVerdict-4"
+    style="position: absolute; display: none;">
     <div class="card border border-secondary mx-auto px-5 pt-2" data-aos="zoom-out" data-aos-duration="3000"
         style="background-color: rgb(46, 54, 59)">
         <div class="rounded-pill ml-auto">
-            <a class="text-light" id="slide3_verdict" href="#" onclick="color3()">
+            <a class="text-light" id="c-SV-4" href="#" onclick="colorFill_4()">
                 <h6 class="bg-dark" style="opacity: .70;">
                     Lack of clean water access correlates to lack of education.
                 </h6>
@@ -105,5 +206,10 @@ Claims Made
         </div>
     </div>
 </div>
+
+
+
+
+
 
 {% endblock %}

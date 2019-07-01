@@ -273,12 +273,15 @@ function year() {
 
 //! Spaar
 // These are the funcs that make the claim clickable, and reveals its truthfullness .onclick()
-function color0() {
-  //clearColors("#slide3_verdict")
-  d3.select("#slide0_verdict")
+//todo these should probably be refactored into just one case switcher or otherwise
+//
+function colorFill_0() {
+  //clearColors("")
+  d3.select("c-SV-0")
     .select("h6")
     .classed('bg-dark', false)
-    .classed('bg-success', true)
+    //remove this after testing
+    .classed('bg-info', true)
     .classed('border', true)
     .classed('border-light', true)
     .style('opacity', 1)
@@ -288,9 +291,9 @@ function color0() {
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
-function color1() {
-  //clearColors("#slide0_verdict")
-  d3.select("#slide1_verdict")
+function colorFill_1() {
+  //clearColors("")
+  d3.select("c-SV-1")
     .select("h6")
     .classed('bg-dark', false)
     .classed('bg-danger', true)
@@ -302,9 +305,9 @@ function color1() {
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
-function color2() {
-  //clearColors("#slide1_verdict")
-  d3.select("#slide2_verdict")
+function colorFill_2() {
+  //clearColors("")
+  d3.select("c-SV-2")
     .select("h6")
     .classed('bg-dark', false)
     .classed('bg-warning', true)
@@ -316,9 +319,9 @@ function color2() {
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
-function color3() {
-  //clearColors("#slide2_verdict")
-  d3.select("#slide3_verdict")
+function colorFill_3() {
+  //clearColors("")
+  d3.select("c-SV-3")
     .select("h6")
     .classed('bg-dark', false)
     .classed('bg-success', true)
@@ -330,8 +333,25 @@ function color3() {
     .classed('text-white', true)
   //d3.select(".carousel-control-next-icon")
 };
-function clearColors(prevSlideID) {
-  d3.select(prevSlideID)
+function colorFill_4() {
+  //clearColors("")
+  d3.select("c-SV-4")
+    .select("h6")
+    .classed('bg-dark', false)
+    .classed('bg-success', true)
+    .classed('border', true)
+    .classed('border-light', true)
+    .style('opacity', 1)
+    .classed('py-4', true)
+    .classed('text-light', false)
+    .classed('text-white', true)
+  //d3.select(".carousel-control-next-icon")
+};
+
+
+
+function clearColors(SlideID) {
+  d3.select(SlideID)
     .select("h6")
     .classed('bg-dark', true)
     .classed('bg-success', false)
@@ -339,11 +359,47 @@ function clearColors(prevSlideID) {
     .classed('bg-danger', false)
     .classed('border', false)
     .classed('border-light', false)
-    .style('opacity', .00)
+    .style('display', 'none')
     .classed('py-4', false)
     .classed('text-light', true)
     .classed('text-white', false)
 };
+
+
+
+
+
+
+function verdictExecute(arrowCase) {
+  if ((arrowCase) && (arrowCase != "prev") || (arrowCase != "next")) {
+    alert("[!] Received arrowCase was invalid: " + arrowCase);
+    console.warn("[!] Received arrowCase was invalid" + arrowCase);
+  } else {
+    //? get the currently .active slide
+
+    //? c
+    // put the arrows' locs into variables
+    // var arrowPrev = d3.select('.carousel-control-prev').select("#arrow-Prev");
+    // var arrowNext = d3.select('.carousel-control-next').select("#arrow-Next");
+    //* case switcher for the arrow received from the onclick
+    switch (arrowCase) {
+      case "prev":
+        console.log("\nArrow Case: " + arrowCase + " [<< PREV] received: Displaying new verdict and hiding all others...\n");
+        //!
+        //
+        //!
+        break;
+      case "next":
+        console.log("\nArrow Case: " + arrowCase + " [NEXT >>] received: Displaying new verdict and hiding all others...\n");
+        //!
+        //!
+        //!
+        break;
+    }
+  }
+}
+
+
 /*
 function clearVerdict(slideNumber) {
   var SlideToHide = slideNumber;
@@ -361,15 +417,6 @@ function clearVerdict(slideNumber) {
   }
 }
 */
-function clearVerdict() {
-// select whieer slide is .active and make it visible, keep the others
-// hidden by default
-  //*sleep to ensure the active class has been applied after click
-  d3.select("#carousel-inner")
-    .select(".active")
-    //todo add ids to each carousel-inner
+    /////todo add ids to each carousel-inner
     //todo impliment a case switch for which id is then in the selection
-    //todo each case will make the appropriate verdict clickers opacity changed
-    .style('opacity', .00)
-
-}
+    //todo each case will make the appropriate verdict clickers display .style changed

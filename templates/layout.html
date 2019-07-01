@@ -79,6 +79,7 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript">
         d3.select("h2")
+            //todo should probably ad an ID to the tag this is writing into, then select it for accuracy
             .text(function () {
                 var title = document.getElementsByTagName("title")[0];
                 return title.innerHTML
