@@ -62,3 +62,15 @@ body {
     display:inline-block;
     float: none;
 }
+
+/*
+This disables navigation via the indicator slabs; Makes it easier to code
+for the slideID.
+*/
+@media (max-width: 2160px) {
+  .carousel-indicators,
+  .carousel-indicators li {
+    cursor: default;
+    pointer-events: none;
+  }
+}

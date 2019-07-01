@@ -263,113 +263,366 @@ function year() {
     }
   );
 }
-
 // run filterPlot with 'world' as the selectedCountry to produce the initial bar chart
-
-
-
-
-
-
+//
+//
+//
+//
+//
 //! Spaar
-// These are the funcs that make the claim clickable, and reveals its truthfullness .onclick()
-function color0() {
-  //clearColors("#slide3_verdict")
-  d3.select("#slide0_verdict")
+//* These are the funcs that make the claim clickable, and reveals the "Verdict" about it .onclick()
+//todo these should probably be refactored into just one case switcher or otherwise
+//
+function colorFill_0() {
+  clearColors("#c-SV-x")
+  clearColors("#c-SV-1")
+  //killVerdictDisplays();
+  d3.select("#c-SV-0-Parent")
+    .classed('border-secondary', false)
+    .classed('border-info', true)
+    .select("#c-SV-0")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-success', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
-    .classed('px-5', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-info', true)
 };
-function color1() {
-  //clearColors("#slide0_verdict")
-  d3.select("#slide1_verdict")
+function colorFill_1() {
+  clearColors("#c-SV-2")
+  clearColors("#c-SV-0")
+  //killVerdictDisplays();
+  d3.select("#c-SV-1-Parent")
+    .classed('border-secondary', false)
+    .classed('border-danger', true)
+    .select("#c-SV-1")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-danger', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-danger', true)
 };
-function color2() {
-  //clearColors("#slide1_verdict")
-  d3.select("#slide2_verdict")
+function colorFill_2() {
+  clearColors("#c-SV-3")
+  clearColors("#c-SV-1")
+  //killVerdictDisplays();
+  d3.select("#c-SV-2-Parent")
+    .classed('border-secondary', false)
+    .classed('border-warning', true)
+    .select("#c-SV-2")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-warning', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-warning', true)
 };
-function color3() {
-  //clearColors("#slide2_verdict")
-  d3.select("#slide3_verdict")
+function colorFill_3() {
+  clearColors("#c-SV-4")
+  clearColors("#c-SV-2")
+  //killVerdictDisplays();
+  d3.select("#c-SV-3-Parent")
+    .classed('border-secondary', false)
+    .classed('border-success', true)
+    .select("#c-SV-3")
     .select("h6")
-    .classed('bg-dark', false)
-    .classed('bg-success', true)
-    .classed('border', true)
-    .classed('border-light', true)
     .style('opacity', 1)
-    .classed('py-4', true)
     .classed('text-light', false)
-    .classed('text-white', true)
-  //d3.select(".carousel-control-next-icon")
+    .classed('text-success', true)
 };
-function clearColors(prevSlideID) {
-  d3.select(prevSlideID)
+function colorFill_4() {
+  clearColors("#c-SV-x")
+  clearColors("#c-SV-3")
+  //killVerdictDisplays();
+  d3.select("#c-SV-4-Parent")
+    .classed('border-secondary', false)
+    .classed('border-success', true)
+    .select("#c-SV-4")
     .select("h6")
-    .classed('bg-dark', true)
-    .classed('bg-success', false)
-    .classed('bg-warning', false)
-    .classed('bg-danger', false)
-    .classed('border', false)
-    .classed('border-light', false)
-    .style('opacity', .00)
-    .classed('py-4', false)
+    .style('opacity', 1)
+    .classed('text-light', false)
+    .classed('text-success', true)
+};
+//
+function colorFill_x() {
+  clearColors("#c-SV-4")
+  clearColors("#c-SV-0")
+  killVerdictDisplays_notX();
+  d3.select("#c-SV-x-Parent")
+    .classed('border-secondary', false)
+    .classed('border-info', true)
+    .select("#c-SV-x")
+    .select("h6")
+    .style('opacity', 1)
+    .classed('text-light', false)
+    .classed('text-info', true)
+};
+//
+//* Remove all of CSS formatting applied to "Verdicts"
+function clearColors(SlideID) {
+  d3.select(SlideID + "-Parent")
+    // Parent level
+    .classed('border-secondary', true)
+    .classed('border-info', false)
+    .classed('border-danger', false)
+    .classed('border-warning', false)
+    .classed('border-success', false)
+    // Child level
+    .select(SlideID)
+    .select("h6")
+    .style('opacity', .70)
     .classed('text-light', true)
-    .classed('text-white', false)
+    .classed('text-info', false)
+    .classed('text-danger', false)
+    .classed('text-warning', false)
+    .classed('text-success', false)
 };
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//! ///////////////////////////////////////////////////////////////////////////////////////////////////// !//
+//!                                                                                                       !//
+//!                                  Spaar's Abhorrent JS: Claims.html                                    !//
+//!                                                                                                       !//
+//! ///////////////////////////////////////////////////////////////////////////////////////////////////// !//
+//--------------------------------------------------------------------------------------------------------//
+//
+//
+function getPreviousObject() {
+  let previousSlideObj = d3.select(".carousel-indicators").select(".active");
+  return previousSlideObj
+};
+//
+function debuggingWhatnot(activeSlideObj) {
+  console.log("Active Carousel Slide ID: " + activeSlideObj._groups[0][0].attributes[2].nodeValue + "\n");
+};
+//
+function killVerdictDisplays() {
+  d3.select("#carousel-SlideVerdict-0")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-1")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-2")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-3")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-4")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-x")
+    .style('display', 'none');
+};
+//
+function killVerdictDisplays_notX() {
+  d3.select("#carousel-SlideVerdict-0")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-1")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-2")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-3")
+    .style('display', 'none');
+  d3.select("#carousel-SlideVerdict-4")
+    .style('display', 'none');
+};
+//
+//
+//
+//todo    better comments, change vars to lets || change vars to consts where possible
+//*    verdictExecute(arrow) parses/loads/etc the correct Verdict
+function verdictExecute(arrow) {
+  killVerdictDisplays();
+  // turn the import into global var called arrowCase/
+  var arrowCase = arrow;
+  // if arrowCase is a bad cast, shit the bed
+  if (arrowCase === null) {
+    alert("[!] Received arrowCase was null: '" + arrowCase + "'");
+    console.error("\n[!] Received arrowCase was invalid: " + arrowCase + "\n");
+  } else {
+    // d3 selects what /it/ thinks is the currently .active slide object
+    var previousSlideObj = getPreviousObject();
+    // dig down way deep to get dat nodeValue and return it as an int
+    var slideIndex = parseInt(previousSlideObj._groups[0][0].attributes[2].nodeValue);
+    // if we're on the 0th slide, don't do any math on it like we do in the switcheroo
+    //! this is buggy af
+    if (slideIndex === 0) {
+      var slideID = parseInt(slideIndex);
+      console.log("\nThe slideIndex reads as '0'\n")
+    } else {
+      // case switcheroo depending on the arrowCase (which direction the user is navigating the slides)
+      // the only difference is if we are adding or subtracting from the slideIndex that d3 gives us since
+      // I can't figure out how to lag it to read the correct and current slide's value over the previous.
+      switch (arrowCase) {
+        // for "Prev" (navigating backwards on the carousel slides)
+        case 'prev':
+          console.log("\nAccepted arrowCase of: '" + arrowCase + "' received...\n");
+          console.log("\nLength of arrowCase: '" + arrowCase.length + "'...\n");
+          console.log("\n'[<< PREV]' subtracting 1 from the slideBase...\n\n\n\n-----------------------------------\n\n\n");
+          // subtract 1 to from Index and make that the slideID global var
+          var slideID = parseInt(slideIndex - 1);
+          console.log("\nActive slideID: '" + slideID + "'\n");
+          // ensure all Verdicts are hidden in their absolute positions
+          killVerdictDisplays();
+          // assign a formatted string to a var using the target's ID and our current slideID
+          var activeVerdictID = ("#" + "carousel-SlideVerdict-" + slideID)
+          // select it with d3 then revert the display to an unset/default value
+          d3.select(activeVerdictID).style('display', 'unset');
+          break;
+        // for "Next" (navigating forwardss on the carousel slides)
+        case 'next':
+          console.log("\nAccepted arrowCase of: '" + arrowCase + "' received...\n");
+          console.log("\nLength of arrowCase: '" + arrowCase.length + "'...\n");
+          console.log("\n'[NEXT >>]' adding 1 to the slideBase...\n\n\n\n-----------------------------------\n\n\n");
+          // add 1 to the Index and make that the slideID global var
+          var slideID = parseInt(slideIndex + 1);
+          console.log("\nActive slideID: '" + slideID + "'\n");
+          // ensure all Verdicts are hidden in their absolute positions
+          killVerdictDisplays();
+          // assign a formatted string to a var using the target's ID and our current slideID
+          var activeVerdictID = ("#" + "carousel-SlideVerdict-" + slideID)
+          // select it with d3 then revert the display to an unset/default value
+          d3.select(activeVerdictID).style('display', 'unset')
+          break;
+      };
+    };
+  };
+};
+//
+//
+//--------------------------------------------------------------------------------------------------------//
+//!!!!!!!!!!!!!!!    Below doesn't work but I am keeping it for now for reference    !!!!!!!!!!!!!!!!!
+//
+//
+//
+//--------------------------------------------------------------------------------------------------------//
+//!   Hopes:::     Custom event listeners will watch and report on any class changes from null to
+//!                ".active". Processes for rendering the "Verdicts" could then be built out.
+//!   Result:::    I am not really sure where the hang up is yet after a large amount of debugging...
+//
 /*
-function clearVerdict(slideNumber) {
-  var SlideToHide = slideNumber;
-  switch (SlideToHide) {
-    case 0:
-      console.log("\nCase 0 received, hiding the first slide..\n")
-      d3.select("#verdictRow0")
-        .style('opacity', .00)
-      break;
-    case 3:
-      console.log("\nCase 3 received, hiding the first slide..\n")
-      d3.select("#verdictRow3")
-        .style('opacity', .00)
-      break;
-  }
-}
+//* Function creation for newly, custom created listeners/handlers' implimentation.
+// The ID of the element to be watches, as well as the desired call back are passed in to create the new listener. The interval is set to every 10ms, and each time the element is checked for my defined states of class being either being null or active. If a change between those 2 states is detected, the callback is invoked.
+function addClassNameListener(elemId, callback) {
+    var elem = document.getElementById(elemId);
+    var lastClassName = elem.className;
+    window.setInterval( function() {
+       var className = elem.className;
+        if (className !== lastClassName) {
+            callback();
+            lastClassName = className;
+        }
+    },10);
+};
+//
+//* Creations for onclick listener/handler of element ID: "arrow-Prev"
+// Declarations and inits of event listeners of class changes (specifically the addition or removal of the "active" class which is manipulated by the carousel to indicate which slide is currently active/shown to the user).
+//
+//*     Slides[0]
+//
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-0").className = "active";
+};
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-0").className = "";
+};
+addClassNameListener("carousel-IndicatorID-0", function () { alert("changed"); });
+//
+//
+//*     Slides[1]
+//
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-1").className = "active";
+};
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-1").className = "";
+};
+addClassNameListener("carousel-IndicatorID-1", function () { alert("changed"); });
+//
+//
+//*     Slides[2]
+//
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-2").className = "active";
+};
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-2").className = "";
+};
+addClassNameListener("carousel-IndicatorID-2", function () { alert("changed"); });
+//
+//
+//*     Slides[3]
+//
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-3").className = "active";
+};
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-3").className = "";
+};
+addClassNameListener("carousel-IndicatorID-3", function () { alert("changed"); });
+//
+//
+//*     Slides[4]
+//
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-4").className = "active";
+};
+document.getElementById("arrow-Prev").onclick = function () {
+  document.getElementById("carousel-IndicatorID-4").className = "";
+};
+addClassNameListener("carousel-IndicatorID-4", function () { alert("changed"); });
+//
+//
+//* Creations for onclick listener/handler of element ID: "arrow-Next"
+// Declarations and inits of event listeners of class changes (specifically the addition or removal of the "active" class which is manipulated by the carousel to indicate which slide is currently active/shown to the user).
+//
+//*     Slides[0]
+//
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-0").className = "active";
+};
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-0").className = "";
+};
+addClassNameListener("carousel-IndicatorID-0", function () { alert("changed"); });
+//
+//
+//*     Slides[1]
+//
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-1").className = "active";
+};
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-1").className = "";
+};
+addClassNameListener("carousel-IndicatorID-1", function () { alert("changed"); });
+//
+//
+//*     Slides[2]
+//
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-2").className = "active";
+};
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-2").className = "";
+};
+addClassNameListener("carousel-IndicatorID-2", function () { alert("changed"); });
+//
+//
+//*     Slides[3]
+//
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-3").className = "active";
+};
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-3").className = "";
+};
+addClassNameListener("carousel-IndicatorID-3", function () { alert("changed"); });
+//
+//
+//*     Slides[4]
+//
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-4").className = "active";
+};
+document.getElementById("arrow-Next").onclick = function () {
+  document.getElementById("carousel-IndicatorID-4").className = "";
+};
+addClassNameListener("carousel-IndicatorID-4", function () { alert("changed"); });
+//
 */
-function clearVerdict() {
-// select whieer slide is .active and make it visible, keep the others
-// hidden by default
-  //*sleep to ensure the active class has been applied after click
-  d3.select("#carousel-inner")
-    .select(".active")
-    //todo add ids to each carousel-inner
-    //todo impliment a case switch for which id is then in the selection
-    //todo each case will make the appropriate verdict clickers opacity changed
-    .style('opacity', .00)
-
-}
+//--------------------------------------------------------------------------------------------------------//
