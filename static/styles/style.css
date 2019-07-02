@@ -29,6 +29,19 @@ body {
   top: 50%;
   transform: translateY(-50%);
 }
+
+#main_content2 {
+  z-index: 2;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  background-color:rgba(1,1,1,0.8);
+  padding:10px 10px 50px 10px;
+  /* Vertical center */
+  text-shadow: 2px 2px #000000;
+
+}
 .btn {
 
 }
