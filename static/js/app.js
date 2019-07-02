@@ -200,14 +200,18 @@ function year() {
             locations: unpack(rows, "Country Code"),
             z: unpack(rows, 2000),
             text: unpack(rows, "Country Code"),
-            autocolorscale: true
+                      colorscale: [
+              [0, 'rgb(129, 25, 24)'], [0.2, 'rgb(227, 104, 103)'],
+              [0.4, 'rgb(248, 219, 219)'], [0.6, 'rgb(196, 196, 255)'],
+              [0.8, 'rgb(120, 120, 255)'], [1, 'rgb(0, 0, 157)']
+          ],
           }
         ],
         layout: {
           title: "Access to Clean Water by Country",
           geo: {
             projection: {
-              type: "Hammer"
+              type: "robinson"
             }
           },
           sliders: [
