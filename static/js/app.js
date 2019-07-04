@@ -144,7 +144,7 @@ function line() {
   });
 
   var layout1 = {
-    title: "Percent of Population With At Least Basic Drinking Water Coverage",
+    title: "Percentage of Population With At Least Basic Drinking Water Coverage",
     showlegend: true
   };
 
