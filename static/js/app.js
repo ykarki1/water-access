@@ -131,7 +131,7 @@ function line() {
     var atLeastBasic = [];
     var x = [];
     countryData.forEach(element => {
-      atLeastBasic.push(element.atLeastBasic/(element.limited + element.surfaceWater + element.unimproved + element.atLeastBasic)*100);
+      atLeastBasic.push(element.atLeastBasic/(element.limited + element.surfaceWater + element.unimproved + element.atLeastBasic));
       x.push(element.year);
     });
     var trace = {
@@ -145,7 +145,12 @@ function line() {
 
   var layout1 = {
     title: "Percentage of Population With At Least Basic Drinking Water Coverage",
-    showlegend: true
+    showlegend: true,
+    yaxis:{
+      tickformat: ',.0%',
+      hoverformat: ',.2%',
+      range: [0,1]
+    }
   };
 
   Plotly.newPlot("line", traces, layout1, { responsive: true });
