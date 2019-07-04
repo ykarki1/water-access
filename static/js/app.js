@@ -131,7 +131,7 @@ function line() {
     var atLeastBasic = [];
     var x = [];
     countryData.forEach(element => {
-      atLeastBasic.push(element.atLeastBasic);
+      atLeastBasic.push(element.atLeastBasic/(element.limited + element.surfaceWater + element.unimproved + element.atLeastBasic)*100);
       x.push(element.year);
     });
     var trace = {
@@ -144,7 +144,7 @@ function line() {
   });
 
   var layout1 = {
-    title: "At least basic drinking water coverage",
+    title: "Percentage of Population With At Least Basic Drinking Water Coverage",
     showlegend: true
   };
 
