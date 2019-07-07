@@ -225,7 +225,7 @@ function year() {
               x: 0.2,
               len: 0.95,
               currentvalue: {
-                xanchor: "right",
+                xanchor: "center",
                 prefix: "Year: ",
                 font: {
                   color: "#888",
