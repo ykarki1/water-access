@@ -147,6 +147,7 @@ function line() {
     title: "Percentage of Population With At Least Basic Drinking Water Coverage",
     showlegend: true,
     yaxis:{
+      autorange: true,
       tickformat: ',.0%',
       hoverformat: ',.2%',
       range: [0,1]
