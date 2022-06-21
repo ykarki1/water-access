@@ -4,7 +4,7 @@ autopep8==1.4.4
 Flask==1.0.3
 Flask-SQLAlchemy==2.4.0
 Jinja2==2.10.1
-numpy==1.16.2
+numpy==1.22.0
 pandas==0.24.1
 rfc3339==6.0
 selenium==3.141.0
